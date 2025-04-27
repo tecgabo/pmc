@@ -22,6 +22,32 @@ BACKGROUND_COLOR = "#F5F5F5"
 # URL do novo logo da TecVitória (amarelo)
 TECVITORIA_LOGO = "https://tecvitoria.com.br/wp-content/uploads/2025/04/logo-amarelo.webp"
 
+# Templates atualizados
+TEMPLATES = {
+    "Selecione um template": {k: "" for k in [
+        'justificativas', 'pitch', 'produto', 'stakeholders', 'premissas', 'riscos', 
+        'objetivos', 'requisitos', 'equipe', 'entregas', 'cronograma', 'beneficios', 
+        'restricoes', 'custos', 'observacoes']},
+    
+    "Projeto de Inovação": {
+        'justificativas': "• Mercado em transformação digital\n• Concorrência lançou novo produto",
+        'pitch': "Desenvolvimento de plataforma integrada de gestão para PMEs.",
+        'produto': "• Plataforma SaaS modular\n• Integração com bancos e marketplaces",
+        'stakeholders': "• Diretoria Executiva\n• Líderes de departamento",
+        'premissas': "• Equipe permanecerá alocada\n• Orçamento aprovado",
+        'riscos': "• Atraso na aprovação [Prob: Média] [Impacto: Alto]",
+        'objetivos': "• Lançar MVP até 30/09/2024",
+        'requisitos': "[MUST] Integração com bancos\n[MUST] Segurança de dados",
+        'equipe': "• GP: Ana Silva\n• Tech Lead: Carlos Souza",
+        'entregas': "1. Especificação técnica\n2. Módulo financeiro",
+        'cronograma': "• F1 (M1-2): Especificação\n• F2 (M3-5): Desenvolvimento",
+        'beneficios': "• Redução de 30% em processos manuais",
+        'restricoes': "• Orçamento: R$ 1.8M\n• Prazo: 7 meses",
+        'custos': "• Desenvolvimento: R$ 1.2M\n• Infra: R$ 300k",
+        'observacoes': ""
+    }
+}
+
 # CSS personalizado
 st.markdown(f"""
 <style>
@@ -54,7 +80,41 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# [...] (O restante das funções e configurações permanecem iguais)
+# Função para gerar o canvas
+def generate_canvas(data):
+    img = Image.new('RGB', (1754, 1240), color=(255, 255, 255))
+    d = ImageDraw.Draw(img)
+    
+    try:
+        font = ImageFont.truetype("arial.ttf", 24)
+    except:
+        font = ImageFont.load_default()
+    
+    d.text((50, 50), f"Project Model Canvas - {data.get('nome_projeto', '')}", font=font, fill=PRIMARY_COLOR)
+    return img
+
+# Inicializar session_state
+if 'dados' not in st.session_state:
+    st.session_state.dados = {
+        'nome_projeto': '',
+        'responsavel': '',
+        'data': datetime.date.today().strftime("%d/%m/%Y"),
+        'justificativas': '',
+        'pitch': '',
+        'produto': '',
+        'stakeholders': '',
+        'premissas': '',
+        'riscos': '',
+        'objetivos': '',
+        'requisitos': '',
+        'equipe': '',
+        'entregas': '',
+        'cronograma': '',
+        'beneficios': '',
+        'restricoes': '',
+        'custos': '',
+        'observacoes': ''
+    }
 
 # Sidebar atualizado com novo logo
 with st.sidebar:
@@ -85,7 +145,7 @@ with st.sidebar:
     st.markdown('<label class="required-field">Data</label>', unsafe_allow_html=True)
     data_input = st.date_input(
         "data_input",
-        datetime.datetime.strptime(st.session_state.dados['data'], "%d/%m/%Y").date(),
+        value=datetime.datetime.strptime(st.session_state.dados['data'], "%d/%m/%Y").date(),
         label_visibility="collapsed"
     )
     st.session_state.dados['data'] = data_input.strftime("%d/%m/%Y")
@@ -95,7 +155,7 @@ with st.sidebar:
     
     selected_template = st.selectbox(
         "Carregar template:",
-        list(TEMPLATES.keys()),
+        options=list(TEMPLATES.keys()),
         index=0,
         label_visibility="visible"
     )
@@ -105,12 +165,118 @@ with st.sidebar:
         st.success(f"Template '{selected_template}' carregado com sucesso!")
     
     if st.button("Limpar Formulário"):
-        st.session_state.dados = {k: "" for k in st.session_state.dados.keys()}
-        st.session_state.dados.update({
-            'nome_projeto': '',
-            'responsavel': '',
-            'data': datetime.date.today().strftime("%d/%m/%Y")
-        })
+        for key in st.session_state.dados:
+            st.session_state.dados[key] = ""
+        st.session_state.dados['data'] = datetime.date.today().strftime("%d/%m/%Y")
         st.rerun()
 
-# [...] (O restante do código permanece igual)
+# Formulário principal
+tab1, tab2 = st.tabs(["📝 Formulário", "🖼️ Visualizar Canvas"])
+
+with tab1:
+    cols = st.columns(2)
+    
+    with cols[0]:
+        st.session_state.dados['justificativas'] = st.text_area(
+            "Justificativas",
+            value=st.session_state.dados['justificativas'],
+            height=150
+        )
+        
+        st.session_state.dados['pitch'] = st.text_area(
+            "Pitch",
+            value=st.session_state.dados['pitch'],
+            height=100
+        )
+        
+        st.session_state.dados['objetivos'] = st.text_area(
+            "Objetivos",
+            value=st.session_state.dados['objetivos'],
+            height=150
+        )
+        
+        st.session_state.dados['produto'] = st.text_area(
+            "Produto/Serviço",
+            value=st.session_state.dados['produto'],
+            height=150
+        )
+    
+    with cols[1]:
+        st.session_state.dados['stakeholders'] = st.text_area(
+            "Stakeholders",
+            value=st.session_state.dados['stakeholders'],
+            height=120
+        )
+        
+        st.session_state.dados['requisitos'] = st.text_area(
+            "Requisitos",
+            value=st.session_state.dados['requisitos'],
+            height=120
+        )
+        
+        st.session_state.dados['entregas'] = st.text_area(
+            "Entregas",
+            value=st.session_state.dados['entregas'],
+            height=120
+        )
+        
+        st.session_state.dados['cronograma'] = st.text_area(
+            "Cronograma",
+            value=st.session_state.dados['cronograma'],
+            height=120
+        )
+    
+    st.session_state.dados['premissas'] = st.text_area(
+        "Premissas",
+        value=st.session_state.dados['premissas'],
+        height=100
+    )
+    
+    st.session_state.dados['riscos'] = st.text_area(
+        "Riscos",
+        value=st.session_state.dados['riscos'],
+        height=100
+    )
+    
+    st.session_state.dados['restricoes'] = st.text_area(
+        "Restrições",
+        value=st.session_state.dados['restricoes'],
+        height=100
+    )
+    
+    st.session_state.dados['equipe'] = st.text_area(
+        "Equipe",
+        value=st.session_state.dados['equipe'],
+        height=100
+    )
+    
+    st.session_state.dados['beneficios'] = st.text_area(
+        "Benefícios",
+        value=st.session_state.dados['beneficios'],
+        height=100
+    )
+    
+    st.session_state.dados['custos'] = st.text_area(
+        "Custos",
+        value=st.session_state.dados['custos'],
+        height=100
+    )
+    
+    st.session_state.dados['observacoes'] = st.text_area(
+        "Observações",
+        value=st.session_state.dados['observacoes'],
+        height=100
+    )
+
+with tab2:
+    if st.session_state.dados['nome_projeto']:
+        st.image(
+            generate_canvas(st.session_state.dados), 
+            caption=f"Canvas para {st.session_state.dados['nome_projeto']}"
+        )
+    else:
+        st.warning("Preencha o nome do projeto para visualizar o canvas.")
+
+# Rodapé
+st.markdown("---")
+st.markdown("<p style='text-align:center;'>© 2024 TecVitória</p>", unsafe_allow_html=True)
