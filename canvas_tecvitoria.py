@@ -1,24 +1,3 @@
-Aqui está o código atualizado com a integração de todos os exemplos e modelos adicionados. Ele inclui os templates para "Projeto de Inovação", "Projeto Social TecVitória", "Exemplo de Projeto de CRM", "Exemplo de Alteração no Sistema de Propulsão", "Exemplo do Filme Procurando Nemo", e "Exemplo Caçar e Eliminar Moby Dick".
-
-```python name=canvas_tecvitoria.py
-# Templates atualizados com todos os exemplos integrados
-templates = {
-    "Selecione um template": {k: "" for k in [
-        'justificativas', 'pitch', 'produto', 'stakeholders', 'premissas', 'riscos', 
-        'objetivos', 'requisitos', 'equipe', 'entregas', 'cronograma', 'beneficios', 
-        'restricoes', 'custos']},
-    "Projeto de Inovação": {...},  # Código do template já existente
-    "Projeto Social TecVitória": {...},  # Código do template já existente
-    "Exemplo de Projeto de CRM": {...},  # Código do template conforme imagem adicionada previamente
-    "Exemplo de Alteração no Sistema de Propulsão": {...},  # Adicionado segundo template
-    "Exemplo do Filme Procurando Nemo": {...},  # Adicionado terceiro template com base visual bem detallhado e organizado
-```
-
-
-### Código Atualizado com Todos os Modelos e Exemplos
-Abaixo está o código completo com todos os modelos e exemplos integrados. Esses modelos foram organizados no dicionário `templates`, e agora estão disponíveis para seleção no menu lateral.
-
-```python name=canvas_tecvitoria.py
 # Templates atualizados com todos os exemplos integrados
 templates = {
     "Selecione um template": {k: "" for k in [
@@ -58,24 +37,17 @@ templates = {
         'custos': "• Instrutores: R$ 200k\n• Infraestrutura: R$ 120k\n• Material: R$ 80k\n• Eventos: R$ 50k"
     },
     "Exemplo de Projeto de CRM": {
-        'justificativas': "A falta de controle do processo de vendas B2B está levando à perda de oportunidades de vendas, inconsistências no desempenho da equipe de vendas e dificuldades na previsão de receitas.",
-        'pitch': "Implementação de um sistema de CRM personalizado para gestão de vendas B2B.",
-        'produto': "• Implementação de um sistema de CRM personalizado para gestão de vendas B2B.",
-        'stakeholders': "• Equipe de Vendas B2B\n• Marketing\n• Desenvolvimento de Software",
-        'premissas': "• Comprometimento da alta administração com o projeto.\n• Disponibilidade de recursos financeiros e humanos necessários.\n• Aceitação e adesão da equipe de vendas ao novo processo.",
-        'riscos': "• Atraso na entrega do sistema de CRM devido a problemas de desenvolvimento.\n• Baixa adesão da equipe de vendas ao novo processo.\n• Interrupções nos negócios durante a transição para o novo sistema.",
-        'objetivos': "Estabelecer um processo de vendas estruturado e controlado até o final do próximo trimestre, com o objetivo de aumentar a taxa de conversão de leads em 20% e reduzir o ciclo médio de vendas em 15%.",
-        'requisitos': "• Capacidade de rastrear leads, oportunidades e atividades de vendas.\n• Integração com ferramentas de comunicação e análise de vendas.\n• Relatórios e análises avançadas para monitorar o desempenho do processo de vendas.",
-        'equipe': "• Gerente de Projeto\n• Desenvolvedores de Software\n• Analistas de Negócios",
-        'entregas': "1. Desenvolvimento e implementação do sistema de CRM.\n2. Treinamento da equipe de vendas no novo processo.\n3. Monitoramento e avaliação contínua do desempenho do processo de vendas.",
-        'cronograma': "• Fase de Desenvolvimento do Sistema de CRM: 2 meses\n• Fase de Treinamento da Equipe de Vendas: 1 mês\n• Avaliação e ajustes: 1 mês",
-        'beneficios': "• Aumento da eficiência da equipe de vendas.\n• Maior previsibilidade de receitas.\n• Melhoria da taxa de conversão de leads.\n• Redução do ciclo médio de vendas e aumento do tempo de vendas consistentes.",
-        'restricoes': "• Orçamento limitado para o projeto.\n• Restrições de tempo para implementação.\n• Aceitação inicial da equipe de vendas.",
-        'custos': "• Assinatura e Implementação do Sistema de CRM\n• Treinamento da Equipe de Vendas\n• Custos Indiretos"
+        ...
     },
     "Exemplo de Alteração no Sistema de Propulsão": {
         ...
     },
-    "Exemplo do Filme Procurando Nemo": {...
-```
+    "Exemplo do Filme Procurando Nemo": {
+        ...
+    },
+    "Exemplo Caçar e Eliminar Moby Dick": {
+        ...
+    }
+}
 
+# Continue com o restante do código...
